@@ -31,9 +31,10 @@ function showResult(tokenResponse) {
 // Edit this variable with your details.
 var msalConfig = {
   auth: {
-    clientId: "{{APP_ID/CLIENT_ID}}",
+    clientId: "d4fca68b-4002-4f3b-8a85-aeb479065048",
     // Only required if single tenant (remove if multi-tenant)
-    authority: "https://login.microsoftonline.com/{{TENANT_ID}}",
+    authority: "https://login.microsoftonline.com/1faf88fe-a998-4c5b-93c9-210a11d9a5c2",
+    // redirectUri: 'http://localhost:5500/MS-SSO-Example/example_site/index.html',
   },
 };
 
