@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import SignInButton from "./SignInButton";
 
 export default function SSOLogin() {
     return (
@@ -18,8 +18,7 @@ export default function SSOLogin() {
                 Sign in With UCL Single-Sign-On
             </Typography>
 
-            <Button variant="contained">Authorize</Button>
-
-        </Box>
+            <SignInButton />
+       </Box>
     )
 }

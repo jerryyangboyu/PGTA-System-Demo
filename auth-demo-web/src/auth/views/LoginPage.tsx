@@ -1,8 +1,7 @@
-import { Avatar, Typography } from "@mui/material";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
+
 import Box from "@mui/system/Box";
 import Footer from "../../common/Footer";
+import NavBar from "../../common/NavBar";
 import LoginForm from "../components/LoginForm";
 
 export default function LoginPage() {
@@ -16,17 +15,8 @@ export default function LoginPage() {
             alignItems: "center",
             justifyContent: "space-between"
         }}>
-            <AppBar position="relative">
-                <Toolbar>
-                    <Avatar src="/UCL_CS_LOGO.jpeg" sx={{ mr: 2 }} variant="square"></Avatar>
-                    <Typography variant="h6" color="inherit" noWrap>
-                        PGTA Application System
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-
-            <LoginForm />
-
+            <NavBar></NavBar>
+            <LoginForm></LoginForm>
             <Footer></Footer>
         </Box>
     )

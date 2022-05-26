@@ -1,8 +1,3 @@
-/*
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License.
- */
-
 import { LogLevel } from "@azure/msal-browser";
 
 /**
@@ -22,7 +17,7 @@ export const msalConfig = {
     },
     system: {	
         loggerOptions: {	
-            loggerCallback: (level, message, containsPii) => {	
+            loggerCallback: (level: LogLevel, message: string, containsPii: Boolean) => {	
                 if (containsPii) {		
                     return;		
                 }		
