@@ -10,7 +10,6 @@ export default function SignInButton() {
     const handleLogin = () => {
         instance.loginPopup(loginRequest).catch(e => {
             console.log(e);
-            
         })
         .then((result) => {
             navigate("/", {replace: true})

@@ -1,11 +1,11 @@
-import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LoginPage from './auth/views/LoginPage';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { MsalProvider } from "@azure/msal-react";
 import { PublicClientApplication } from "@azure/msal-browser";
-import { AuthenticatedTemplate, MsalProvider, UnauthenticatedTemplate } from "@azure/msal-react";
 import { msalConfig } from "./auth/authConfig";
+import DashBoard from './dashboard/Dashboard';
 
 /**
  * Initialize a PublicClientApplication instance which is provided to the MsalProvider component
@@ -20,17 +20,8 @@ function App() {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={
-              <AuthenticatedTemplate>
-                <h1>logged In</h1>
-              </AuthenticatedTemplate>
-            } />
-
-            <Route path='/login' element={
-              <UnauthenticatedTemplate>
-                <LoginPage />
-              </UnauthenticatedTemplate>
-            } />
+            <Route path='/' element={<DashBoard />} />
+            <Route path='/login' element={<LoginPage />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
