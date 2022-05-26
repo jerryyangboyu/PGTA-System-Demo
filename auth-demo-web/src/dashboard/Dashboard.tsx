@@ -15,6 +15,10 @@ import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import DraftsIcon from "@mui/icons-material/DraftsOutlined"
 import InboxIcon from "@mui/icons-material/InboxOutlined"
+import VacancyCard from "./components/VacancyCard";
+import Grid from "@mui/material/Grid";
+import DetailCard from "./components/DetailCard"
+import CardBoard from "./CardBoard";
 
 
 export default function DashBoard() {
@@ -90,13 +94,16 @@ function DashboardContent() {
                                 ? theme.palette.grey[100]
                                 : theme.palette.grey[900],
                         flexGrow: 1,
+                        paddingTop: "86px", // 64px + 22px
+                        // TODO fix problem main content not hidden behind nav bar
+                        // find a relative more elegant solution than hard coding
+                        
                         height: '100vh',
                         overflow: 'auto',
+                        
                     }}
                 >
-                    <Toolbar />
-
-                    Content
+                    <CardBoard />
                 </Box>
             </Box>
         </ThemeProvider>

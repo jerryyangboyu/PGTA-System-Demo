@@ -57,7 +57,7 @@ export default function AppBar({ open, onToggle }: AppBarProps) {
     const id = open ? 'user-info-popover' : undefined;
 
     return (
-        <StyledAppBar position="absolute" open={open}>
+        <StyledAppBar position='absolute' open={open}>
             {/* keep right padding when drawer closed */}
             <Toolbar>
                 <IconButton
