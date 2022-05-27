@@ -1,11 +1,12 @@
 import { AuthenticatedTemplate } from "@azure/msal-react";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import AppBar from "./AppBar";
 import Drawer from "./Drawer";
 import CardBoard from "./CardBoard";
 import { useState } from "react";
+import { dashboardTheme } from "./dashboardTheme";
 
 export default function DashBoard() {
     return (
@@ -15,8 +16,6 @@ export default function DashBoard() {
     )
 }
 
-const mdTheme = createTheme();
-
 function DashboardContent() {
     const [open, setOpen] = useState(false);
     const toggleDrawer = () => {
@@ -24,7 +23,7 @@ function DashboardContent() {
     };
 
     return (
-        <ThemeProvider theme={mdTheme}>
+        <ThemeProvider theme={dashboardTheme}>
             <>
                 <CssBaseline />
 
@@ -39,11 +38,11 @@ function DashboardContent() {
                             theme.palette.mode === 'light'
                                 ? theme.palette.grey[100]
                                 : theme.palette.grey[900],
-                        
+                        overflow: 'hidden',
                         paddingTop: 4,
-                        paddingLeft: 10,
-                        paddingRight: 10
                     }}
+                    display="flex"
+                    justifyContent="center"
                 >
                     <CardBoard />
                 </Box>

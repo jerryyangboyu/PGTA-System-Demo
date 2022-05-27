@@ -1,7 +1,7 @@
 TODO List
 
 - Finish 6 Different Card View
-- Add Start Function on Menu
+- Add Star Function on Menu
 - Resolve Small Screen Capability Issues (Remove User Section)
 - Add Routes on Index Dashboard Page (Make Sure They are athenticated!!!)
 - Simple Experiment With BackEnd Server
