@@ -1,6 +1,4 @@
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import { styled } from '@mui/material/styles';
-import { drawerWidth } from './Drawer'
+import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -9,40 +7,37 @@ import IconButton from '@mui/material/IconButton';
 import IconHistory from "@mui/icons-material/History"
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingIcon from '@mui/icons-material/Settings';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
-import { Button, Card, CardContent, Divider, Link, List, Popover } from '@mui/material';
+import { Button, Card, CardContent, Divider, Link, Popover } from '@mui/material';
 import { Box } from '@mui/system';
 import { useState, MouseEvent } from 'react';
 import SignOutButton from '../auth/components/SignoutButton';
 
 
-export interface AppBarProps extends MuiAppBarProps {
+export interface AppBarProps {
     open?: boolean;
     onToggle?: () => void
 }
 
-const StyledAppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
-    ...(open && {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    }),
-}));
+// const StyledAppBar = styled(MuiAppBar, {
+//     shouldForwardProp: (prop) => prop !== 'open',
+// })<AppBarProps>(({ theme, open }) => ({
+//     zIndex: theme.zIndex.drawer + 1,
+//     transition: theme.transitions.create(['width', 'margin'], {
+//         easing: theme.transitions.easing.sharp,
+//         duration: theme.transitions.duration.leavingScreen,
+//     }),
+//     ...(open && {
+//         marginLeft: drawerWidth,
+//         width: `calc(100% - ${drawerWidth}px)`,
+//         transition: theme.transitions.create(['width', 'margin'], {
+//             easing: theme.transitions.easing.sharp,
+//             duration: theme.transitions.duration.enteringScreen,
+//         }),
+//     }),
+// }));
 
-export default function AppBar({ open, onToggle }: AppBarProps) {
+export default function DashBoardAppBar({ open, onToggle }: AppBarProps) {
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -57,7 +52,8 @@ export default function AppBar({ open, onToggle }: AppBarProps) {
     const id = open ? 'user-info-popover' : undefined;
 
     return (
-        <StyledAppBar position='absolute' open={open}>
+        <>
+        <AppBar position='fixed'>
             {/* keep right padding when drawer closed */}
             <Toolbar>
                 <IconButton
@@ -65,10 +61,7 @@ export default function AppBar({ open, onToggle }: AppBarProps) {
                     color="inherit"
                     aria-label="open drawer"
                     onClick={onToggle}
-                    sx={{
-                        marginRight: '36px',
-                        ...(open && { display: 'none' }),
-                    }}
+                    sx={{ marginRight: '36px'}}
                 >
                     <MenuIcon />
                 </IconButton>
@@ -156,7 +149,9 @@ export default function AppBar({ open, onToggle }: AppBarProps) {
                     </Card>
                 </Popover>
             </Toolbar>
-        </StyledAppBar>
+        </AppBar>
+        <Toolbar />
+        </>
     )
 }
 

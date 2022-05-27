@@ -1,73 +1,98 @@
 import Divider from '@mui/material/Divider';
-import MuiDrawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeftOutlined';
-import { styled } from '@mui/material/styles';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Toolbar from '@mui/material/Toolbar';
-import { AppBarProps } from './AppBar';
-import Typography from '@mui/material/Typography';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from "@mui/material/ListItemText";
+import List from "@mui/material/List";
+import HomeIcon from "@mui/icons-material/Home"
+import HistoryIcon from "@mui/icons-material/History"
+import RightIcon from "@mui/icons-material/ChevronRight"
+import PersonIcon from "@mui/icons-material/Person"
+import JobIcon from "@mui/icons-material/Work"
+import QuestionIcon from "@mui/icons-material/QuestionAnswer"
+import VacancyIcon from "@mui/icons-material/EventAvailable"
+import RTWIcon from "@mui/icons-material/Approval"
+import { Typography } from '@mui/material';
 
-export const drawerWidth: number = 240;
-
-interface DrawerProp extends AppBarProps {
-    children: JSX.Element
+interface DrawerProp {
+    open: boolean
+    onToggle: () => void
 }
 
-const StyledDrawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        '& .MuiDrawer-paper': {
-            position: 'relative',
-            whiteSpace: 'nowrap',
-            width: drawerWidth,
-            transition: theme.transitions.create('width', {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            boxSizing: 'border-box',
-            ...(!open && {
-                overflowX: 'hidden',
-                transition: theme.transitions.create('width', {
-                    easing: theme.transitions.easing.sharp,
-                    duration: theme.transitions.duration.leavingScreen,
-                }),
-                width: theme.spacing(7),
-                [theme.breakpoints.up('sm')]: {
-                    width: theme.spacing(9),
-                },
-            }),
-        },
-    }),
-);
-
-export default function Drawer({ open, onToggle, children }: DrawerProp) {
+interface MenuButtonProp {
+    icon: JSX.Element
+    label: string
+}
+function MenuButton({ icon, label }: MenuButtonProp) {
     return (
-        <StyledDrawer variant="permanent" open={open}>
-            <Toolbar
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'flex-end',
-                    px: [1],
-                }}
-            >
-                {
-                    open
-                    ? <Typography 
-                        variant='subtitle1'
-                        sx={{
-                            width: "100%",
-                            textAlign: "left",
-                            paddingLeft: 2
-                        }}>Modules Menu</Typography>
-                    : <></>
-                }
-                <IconButton onClick={onToggle}>
-                    <ChevronLeftIcon />
-                </IconButton>
-            </Toolbar>
+        <ListItem disablePadding>
+            <ListItemButton>
+                <ListItemIcon style={{
+                    minWidth: "42px"
+                }}>
+                    {icon}
+                </ListItemIcon>
+                <ListItemText primary={label} sx={{ paddingRight: 10 }} />
+                <ListItemIcon style={{
+                    display: "flex",
+                    justifyContent: "flex-end"
+                }}>
+                    <RightIcon />
+                </ListItemIcon>
+            </ListItemButton>
+        </ListItem>
+    )
+}
+
+function MenuLabel({label}: {label: string}) {
+    return (
+        <ListItem disablePadding>
+            <Typography variant='button' component="span" width="100%" textAlign="center">{label}</Typography>
+        </ListItem>
+    )
+}
+
+export default function Drawer({ open, onToggle }: DrawerProp) {
+    return (
+        <SwipeableDrawer
+            open={open}
+            ModalProps={{ keepMounted: true }}
+            onOpen={onToggle}
+            onClose={onToggle}
+            sx={{
+                zIndex: 10,
+            }}
+        >
+            <Toolbar />
+            <nav aria-label="main function">
+                <List>
+                    <MenuButton icon={<HomeIcon />} label="Home" />
+                    <MenuButton icon={<HistoryIcon />} label="Recent" />
+                </List>
+            </nav>
             <Divider />
-            {children}
-        </StyledDrawer>
+            <nav aria-label="secondary mailbox folders">
+                <List>
+                    <MenuLabel label='Favourite'/>
+                    <MenuButton icon={<VacancyIcon />} label="Vacancies" />
+                    <MenuButton icon={<PersonIcon />} label="Profile" />
+                </List>
+            </nav>
+            <Divider />
+            <nav aria-label="secondary mailbox folders">
+                <List>
+                    <MenuLabel label='Modules'/>
+                    <MenuButton icon={<QuestionIcon />} label="Q&A Session" />
+                    <MenuButton icon={<VacancyIcon />} label="Vacancies" />
+                    <MenuButton icon={<JobIcon />} label="Jobs" />
+                    <MenuButton icon={<PersonIcon />} label="Profile" />
+                    <MenuButton icon={<RTWIcon />} label="Documents" />
+
+                </List>
+            </nav>
+        </SwipeableDrawer>
     )
 
 }

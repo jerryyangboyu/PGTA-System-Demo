@@ -1,32 +1,17 @@
 import { AuthenticatedTemplate } from "@azure/msal-react";
-import SignOutButton from '../auth/components/SignoutButton';
-import * as React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import AppBar from "./AppBar";
 import Drawer from "./Drawer";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import List from "@mui/material/List";
-import DraftsIcon from "@mui/icons-material/DraftsOutlined"
-import InboxIcon from "@mui/icons-material/InboxOutlined"
-import VacancyCard from "./components/VacancyCard";
-import Grid from "@mui/material/Grid";
-import DetailCard from "./components/DetailCard"
 import CardBoard from "./CardBoard";
+import { useState } from "react";
 
 
 export default function DashBoard() {
     return (
         <AuthenticatedTemplate>
             <DashboardContent />
-            {/* <h1>logged In</h1>
-            <SignOutButton /> */}
         </AuthenticatedTemplate>
     )
 }
@@ -34,57 +19,19 @@ export default function DashBoard() {
 const mdTheme = createTheme();
 
 function DashboardContent() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const toggleDrawer = () => {
         setOpen(!open);
     };
 
     return (
         <ThemeProvider theme={mdTheme}>
-            <Box sx={{ display: 'flex' }}>
+            <>
                 <CssBaseline />
 
                 <AppBar open={open} onToggle={toggleDrawer} />
 
-                <Drawer open={open} onToggle={toggleDrawer}>
-                    <>
-                        <nav aria-label="main mailbox folders">
-                            <List>
-                                <ListItem disablePadding>
-                                    <ListItemButton>
-                                        <ListItemIcon>
-                                            <InboxIcon />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Inbox" />
-                                    </ListItemButton>
-                                </ListItem>
-                                <ListItem disablePadding>
-                                    <ListItemButton>
-                                        <ListItemIcon>
-                                            <DraftsIcon />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Drafts" />
-                                    </ListItemButton>
-                                </ListItem>
-                            </List>
-                        </nav>
-                        <Divider />
-                        <nav aria-label="secondary mailbox folders">
-                            <List>
-                                <ListItem disablePadding>
-                                    <ListItemButton>
-                                        <ListItemText primary="Trash" />
-                                    </ListItemButton>
-                                </ListItem>
-                                <ListItem disablePadding>
-                                    <ListItemButton component="a" href="#simple-list">
-                                        <ListItemText primary="Spam" />
-                                    </ListItemButton>
-                                </ListItem>
-                            </List>
-                        </nav>
-                    </>
-                </Drawer>
+                <Drawer open={open} onToggle={toggleDrawer} />
 
                 <Box
                     component="main"
@@ -93,19 +40,15 @@ function DashboardContent() {
                             theme.palette.mode === 'light'
                                 ? theme.palette.grey[100]
                                 : theme.palette.grey[900],
-                        flexGrow: 1,
-                        paddingTop: "86px", // 64px + 22px
-                        // TODO fix problem main content not hidden behind nav bar
-                        // find a relative more elegant solution than hard coding
                         
-                        height: '100vh',
-                        overflow: 'auto',
-                        
+                        paddingTop: 4,
+                        paddingLeft: 10,
+                        paddingRight: 10
                     }}
                 >
                     <CardBoard />
                 </Box>
-            </Box>
+            </>
         </ThemeProvider>
     );
 }
