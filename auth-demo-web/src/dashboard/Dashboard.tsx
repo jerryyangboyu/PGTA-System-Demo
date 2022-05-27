@@ -7,7 +7,6 @@ import Drawer from "./Drawer";
 import CardBoard from "./CardBoard";
 import { useState } from "react";
 
-
 export default function DashBoard() {
     return (
         <AuthenticatedTemplate>
